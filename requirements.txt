@@ -1,6 +1,6 @@
-certifi==2019.3.9
-Django==2.2.1
-elastic-apm==4.2.2
-pytz==2019.1
+certifi==2018.4.16
+Django==2.1
+elastic-apm==3.0.2
+pytz==2018.5
 sqlparse==0.3.0
-urllib3==1.25.2
+urllib3==1.23
