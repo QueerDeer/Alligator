@@ -4,3 +4,4 @@ elastic-apm==3.0.2
 pytz==2018.5
 sqlparse==0.3.0
 urllib3==1.23
+requests==2.21.0

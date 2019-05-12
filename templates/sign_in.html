@@ -22,10 +22,6 @@
     <section class="sign-in">
         <div class="container">
             <div class="signin-content">
-                {% if error %}
-                    <div style="color:red;">{{ error }}</div>
-                {% endif %}
-
                 <div class="signin-image">
                     <figure><img src="{%  static 'images/sign_in.png' %}" alt="sing up image"></figure>
                     <a href="{% url 'sign up' %}" class="signup-image-link">Create an account</a>
@@ -38,16 +34,24 @@
 
                         <div class="form-group">
                             <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" name="username" id="your_name" placeholder="Your Login"/>
+                            <input type="text" name="username" id="your_name" required placeholder="Your Login"/>
                         </div>
                         <div class="form-group">
                             <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                            <input type="password" name="password" id="your_pass" placeholder="Password"/>
+                            <input type="password" name="password" id="your_pass" required placeholder="Password"/>
                         </div>
                         <div class="form-group">
                             <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
                             <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
                         </div>
+
+                        <div class="form-group">
+                            {% if error %}
+                                <label for="login-error"><i class="zmdi zmdi-alert-circle"></i></label>
+                                <input class="login-error" type="text" name="test" id="login-error" disabled placeholder="{{ error }}"/>
+                            {% endif %}
+                        </div>
+
                         <div class="form-group form-button">
                             <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
                         </div>
