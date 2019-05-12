@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from pyPodcastParser.Podcast import Podcast
 
 import requests
 
@@ -17,12 +18,12 @@ class HomeView(TemplateView):
     template_name = "home.html"
 
     def get_context_data(self, **kwargs):
-        term = self.request.GET.get('term')
+        term = 'disgustingmen'
         artists = []
 
         context = super(HomeView, self).get_context_data(**kwargs)
 
-        response = requests.get('https://itunes.apple.com/search?entity=podcast'.format(term), timeout=(21, 21))
+        response = requests.get('https://itunes.apple.com/search?term={}&entity=podcast'.format(term), timeout=(21, 21))
         if response.ok:
             response = response.json()
             if response['resultCount']:
@@ -37,6 +38,20 @@ class HomeView(TemplateView):
 
 class PodcastView(TemplateView):
     template_name = "podcast.html"
+
+    def get_context_data(self, **kwargs):
+        feed_url = self.request.GET.get('feed')
+
+        context = super(PodcastView, self).get_context_data(**kwargs)
+
+        response = requests.get(feed_url)
+        podcast = Podcast(response.content)
+        if podcast.is_valid_rss:
+            context.update({'podcast': podcast})
+
+        return context
+
+
 
 
 class PodcastDetailView(TemplateView):
