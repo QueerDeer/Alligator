@@ -16,7 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from .views import *
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('', HomeView.as_view(), name="homepage"),
+    path('test/', PodcastView.as_view(), name="current podcast"),
+    path('test/1', PodcastDetailView.as_view(), name="current podcast\'s episode"),
+
     path('', include('itunes_search.urls')),
 ]

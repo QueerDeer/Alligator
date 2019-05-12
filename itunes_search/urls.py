@@ -1,5 +1,5 @@
 from django.urls import re_path
-from . import views
+from .views import *
 
 urlpatterns = [
-    re_path(r'^/itunes_search$', views.itunes_search, name='itunes_search')]
+    re_path('itunes_search/', ItunesSearchView.as_view(), name='itunes_search')]

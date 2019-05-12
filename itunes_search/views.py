@@ -1,19 +1,35 @@
-from django.shortcuts import render
-
-from django.http import HttpRequest
-from django.views.decorators.http import require_GET
+from django.views.generic import TemplateView
 
 import requests
 
 
-@require_GET
-def itunes_search(request: HttpRequest):
-    term = request.GET.get('term').lower()
-    entity = request.GET.get('entity').lower()
+class Artist:
+    def __init__(self, artist_name, collection_name, artwork_url, feed_url, genre, country):
+        self.artist_name = artist_name
+        self.collection_name = collection_name
+        self.artwork_url = artwork_url
+        self.feed_url = feed_url
+        self.genre = genre
+        self.country = country
 
-    response = requests.get('https://itunes.apple.com/search?term={}&entity={}'.format(term, entity), timeout=(21, 21))
-    if response.ok:
-        response = response.json()
-        if response['resultCount']:
-            for item in response['results']:
-                pass
+
+class ItunesSearchView(TemplateView):
+    template_name = "podcast-search.html"
+
+    def get_context_data(self, **kwargs):
+        term = self.request.GET.get('term')
+        artists = []
+
+        context = super(ItunesSearchView, self).get_context_data(**kwargs)
+
+        response = requests.get('https://itunes.apple.com/search?term={}&entity=podcast'.format(term), timeout=(21, 21))
+        if response.ok:
+            response = response.json()
+            if response['resultCount']:
+                for item in response['results']:
+                    artists.append(
+                        Artist(item['artistName'], item['collectionName'], item['artworkUrl600'], item['feedUrl'],
+                               item['primaryGenreName'], item['country']))
+
+        context.update({'artists': artists})
+        return context
