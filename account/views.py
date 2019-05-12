@@ -1,35 +1,43 @@
 from django.views.generic import TemplateView
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+
+from django.contrib.auth.models import User
 
 
 class SignUpView(TemplateView):
     template_name = "sign_up.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            password = request.POST.get('pass')
+            password2 = request.POST.get('re_pass')
+
+            if password == password2:
+                User.objects.create_user(username, email, password)
+                return redirect(reverse("login"))
+
+        return render(request, self.template_name)
+
 
 class SignInView(TemplateView):
     template_name = "sign_in.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        context = {}
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("/")
+            else:
+                context['error'] = "Login or password is incorrect"
+        return render(request, self.template_name, context)
 
-# class RegisterView(TemplateView):
-#     template_name = "registration/register.html"
-#
-#     def dispatch(self, request, *args, **kwargs):
-#         form = RegisterForm()
-#         if request.method == 'POST':
-#             form = RegisterForm(request.POST)
-#             if form.is_valid():
-#                 self.create_new_user(form)
-#                 messages.success(request, u"Вы успешно зарегистрировались!")
-#                 return redirect("/")
-#
-#         context = {
-#             'form': form
-#         }
-#         return render(request, self.template_name, context)
-#
-#     def create_new_user(self, form):
-#         email = None
-#         if 'email' in form.cleaned_data:
-#             email = form.cleaned_data['email']
-#         User.objects.create_user(form.cleaned_data['username'], email, form.cleaned_data['password'],
-#                                  first_name=form.cleaned_data['first_name'],
-#                                  last_name=form.cleaned_data['last_name'])
+
+class ProfilePageView(TemplateView):
+    template_name = "user_profile.html"
