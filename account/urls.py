@@ -1,6 +1,9 @@
-from django.urls import re_path
+from django.urls import path
+
+from .views import SignInView, SignUpView
 
 
 urlpatterns = [
-    re_path(r'', ),
+    path('login', SignInView.as_view(), name="sign in"),
+    path('register', SignUpView.as_view(), name="sign up"),
 ]

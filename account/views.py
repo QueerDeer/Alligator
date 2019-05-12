@@ -1,6 +1,12 @@
 from django.views.generic import TemplateView
 
 
+class SignUpView(TemplateView):
+    template_name = "sign_up.html"
+
+
+class SignInView(TemplateView):
+    template_name = "sign_in.html"
 
 
 # class RegisterView(TemplateView):
