@@ -227,3 +227,11 @@ jQuery(document).ready(function($) {
 	siteCountDown();
 
 });
+
+function search()
+{
+	var searchInput = document.getElementById('searchbar').value;
+	if (!searchInput) {return;}
+	var url = "http://alligator.hopto.org/itunes_search?term=" + searchInput;
+	window.open(url, "_self");
+}
