@@ -25,7 +25,7 @@ urlpatterns = [
     re_path(r'^podcast$', PodcastView.as_view(), name="current podcast"),
     path('test/1', PodcastDetailView.as_view(), name="current podcast\'s episode"),
 
-    path('', include('itunes_search.urls')),
+    path('', include('api.urls')),
     path('', include('account.urls'))
 
 ]

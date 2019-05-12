@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'elasticapm.contrib.django',
 
     'account',
-    'itunes_search',
+    'api',
 ]
 
 MIDDLEWARE = [
