@@ -44,10 +44,11 @@ class PodcastView(TemplateView):
 
         context = super(PodcastView, self).get_context_data(**kwargs)
 
-        response = requests.get(feed_url)
-        podcast = Podcast(response.content)
-        if podcast.is_valid_rss:
-            context.update({'podcast': podcast})
+        if feed_url:
+            response = requests.get(feed_url)
+            podcast = Podcast(response.content)
+            if podcast.is_valid_rss:
+                context.update({'podcast': podcast})
 
         return context
 

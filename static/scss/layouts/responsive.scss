@@ -53,9 +53,6 @@
         width: auto;
     }
 
-    .social-login {
-        @include justify-content(center);
-    }
     .form-button {
         text-align: center;
     }
@@ -87,13 +84,7 @@
 
 //end 480px
 @media screen and (max-width: 400px) {
-    .social-login {
-        @include flex-direction(column);
-    }
-    .social-label {
-        margin-right: 0px;
-        margin-bottom: 10px;
-    }
+
 }
 
 //end 400px
