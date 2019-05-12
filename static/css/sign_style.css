@@ -255,7 +255,7 @@ body {
 .signup-content {
   padding: 75px 0; }
 
-.signup-form, .signup-image, .signin-form {
+.signup-form, .signup-image, .signin-form, .signin-image {
   width: 50%;
   overflow: hidden; }
 
