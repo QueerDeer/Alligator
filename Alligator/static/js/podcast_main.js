@@ -238,6 +238,6 @@ function search()
 {
 	var searchInput = document.getElementById('searchbar').value;
 	if (!searchInput) {return;}
-	var url = "http://alligator.hopto.org/api/search?term=" + searchInput;
+	var url = "http://alligator.hopto.org/api/search?term=" + searchInput + "#begin";
 	window.open(url, "_self");
 }
