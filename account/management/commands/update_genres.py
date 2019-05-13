@@ -10,12 +10,18 @@ class Command(BaseCommand):
     resp = None
 
     def parse_genres(self):
+        root, _ = PodcastGenre.objects.update_or_create(id=26,
+                                                        defaults={
+                                                            'name': 'All',
+                                                            'is_active': True,
+                                                            'parent': None
+                                                        })
         for super_genre_key, super_genre_value in self.resp.json()['26']['subgenres'].items():
             obj, created = PodcastGenre.objects.update_or_create(id=int(super_genre_value['id']),
                                                                  defaults={
                                                                      'name': super_genre_value['name'],
                                                                      'is_active': True,
-                                                                     'parent': None
+                                                                     'parent': root
                                                                  })
             if super_genre_value.get('subgenres', None):
                 for genre_key, genre_value in super_genre_value['subgenres'].items():

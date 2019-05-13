@@ -12,6 +12,11 @@ class PodcastGenre(models.Model):
     def is_top_level(self):
         return bool(self.parent)
 
+    class Meta:
+        db_table = 'podcast_genres'
+        verbose_name = 'Podcast Genre'
+        verbose_name_plural = 'Podcast Genres'
+
 
 class Podcast(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -23,8 +28,18 @@ class Podcast(models.Model):
     art_url_100 = models.URLField(default=None)
     art_url_600 = models.URLField(default=None)
 
+    class Meta:
+        db_table = 'podcasts'
+        verbose_name = 'Podcast'
+        verbose_name_plural = 'Podcasts'
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=u"Пользователь")
     avatar = models.FileField(verbose_name=u"Аватар", null=True, blank=True)
     subscribes = models.ManyToManyField(Podcast)
+
+    class Meta:
+        db_table = 'profiles'
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
