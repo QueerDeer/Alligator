@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12" data-aos="fade-down">
+            {% if user.is_authenticated %}
+                <div class="float-right">
+                    <a href="{% url 'profile' %}" class="mb-4" >{{ user.username }}</a>
+                    <span class="sep text-dark h5"> | </span>
+                    <a href="{% url 'sign out' %}" class="mb-4"> Sign Out </a>
+                </div>
+            {% else %}
+                <div class="float-right">
+                    <a href="{% url 'sign in' %}" class="mb-4"> Sign In </a>
+                    <span class="sep text-dark h5"> | </span>
+                    <a href="{% url 'sign up' %}" class="mb-4"> Sign Up </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

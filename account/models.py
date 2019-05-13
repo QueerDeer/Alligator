@@ -36,8 +36,8 @@ class Podcast(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=u"Пользователь")
-    avatar = models.FileField(verbose_name=u"Аватар", null=True, blank=True)
-    subscribes = models.ManyToManyField(Podcast)
+    # avatar = models.FileField(verbose_name=u"Аватар", default='static/images/default_avatar.jpg')
+    subscribes = models.ManyToManyField(Podcast, default=None)
 
     class Meta:
         db_table = 'profiles'
