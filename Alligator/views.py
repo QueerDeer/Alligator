@@ -48,7 +48,7 @@ class PodcastView(TemplateView):
         if feed_url:
             response = requests.get(feed_url)
             podcast = Podcast(response.content)
-            if podcast.is_valid_rss:
+            if podcast.items:
                 context.update({'podcast': podcast})
 
         return context
