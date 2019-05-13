@@ -23,7 +23,7 @@ urlpatterns = [
 
     path('', HomeView.as_view(), name="homepage"),
     re_path(r'^podcast$', PodcastView.as_view(), name="current podcast"),
-    path('test/1', PodcastDetailView.as_view(), name="current podcast\'s episode"),
+    re_path(r'^podcast/detail$', PodcastDetailView.as_view(), name="current episode"),
 
     path('', include('api.urls')),
     path('', include('account.urls'))
