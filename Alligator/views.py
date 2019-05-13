@@ -54,7 +54,5 @@ class PodcastView(TemplateView):
         return context
 
 
-
-
 class PodcastDetailView(TemplateView):
     template_name = "podcast-detail.html"

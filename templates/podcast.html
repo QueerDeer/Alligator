@@ -44,9 +44,9 @@
             <div class="row">
                 <div class="col-12" data-aos="fade-down">
                     <div class="float-right">
-                        <a href="/login" class="mb-4"> Sign In </a>
+                        <a href="{% url 'sign in' %}" class="mb-4"> Sign In </a>
                         <span class="sep text-dark h5"> | </span>
-                        <a href="/register" class="mb-4"> Sign Up </a>
+                        <a href="{% url 'sign up' %}" class="mb-4"> Sign Up </a>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
 
                         <ul class="site-menu js-clone-nav d-none">
                             <li class="has-children active">
-                                <a href="podcast.html">Home</a>
+                                <a href="{% url 'homepage' %}">Home</a>
                                 <ul class="dropdown arrow-top">
                                     <li><a href="#">Menu One</a></li>
                                     <li><a href="#">Menu Two</a></li>
