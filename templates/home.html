@@ -144,16 +144,16 @@
             </div>
 
             {% for artist in artists %}
-            <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
-                <div class="image" style="background-image: url({{ artist.artwork_url }});"></div>
-                <div class="text">
+                <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
+                    <a class="image" href="{% url 'current podcast' %}?feed={{ artist.feed_url }}" style="background-image: url({{ artist.artwork_url }});"></a>
+                    <div class="text">
 
-                    <h3 class="font-weight-light">
-                        <a href={{ "//alligator.hopto.org/podcast?feed="|add:artist.feed_url }}>
-                            {{ artist.collection_name }}
-                        </a>
-                    </h3>
-                    <div class="text-white mb-3">
+                        <h3 class="font-weight-light">
+                            <a href="{% url 'current podcast' %}?feed={{ artist.feed_url }}">
+                                {{ artist.collection_name }}
+                            </a>
+                        </h3>
+                        <div class="text-white mb-3">
                         <span class="text-black-opacity-05">
                             <small>{{ artist.artist_name }}
                                 <span class="sep">/</span>
@@ -162,33 +162,33 @@
                                 {{ artist.country }}
                             </small>
                         </span>
-                    </div>
-                    <p class="mb-4">Podcast info:
-                        <a href={{ artist.collection_url }}>{{ artist.collection_url }}</a>
-                    </p>
+                        </div>
+                        <p class="mb-4">Podcast info:
+                            <a href={{ artist.collection_url }}>{{ artist.collection_url }}</a>
+                        </p>
 
+                    </div>
                 </div>
-            </div>
             {% endfor %}
 
         </div>
-{#        <div class="container" data-aos="fade-up">#}
-{#            <div class="row">#}
-{#                <div class="col-md-12 text-center">#}
-{#                    <div class="site-block-27">#}
-{#                        <ul>#}
-{#                            <li><a href="#">&lt;</a></li>#}
-{#                            <li class="active"><span>1</span></li>#}
-{#                            <li><a href="#">2</a></li>#}
-{#                            <li><a href="#">3</a></li>#}
-{#                            <li><a href="#">4</a></li>#}
-{#                            <li><a href="#">5</a></li>#}
-{#                            <li><a href="#">&gt;</a></li>#}
-{#                        </ul>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
+        {#        <div class="container" data-aos="fade-up">#}
+        {#            <div class="row">#}
+        {#                <div class="col-md-12 text-center">#}
+        {#                    <div class="site-block-27">#}
+        {#                        <ul>#}
+        {#                            <li><a href="#">&lt;</a></li>#}
+        {#                            <li class="active"><span>1</span></li>#}
+        {#                            <li><a href="#">2</a></li>#}
+        {#                            <li><a href="#">3</a></li>#}
+        {#                            <li><a href="#">4</a></li>#}
+        {#                            <li><a href="#">5</a></li>#}
+        {#                            <li><a href="#">&gt;</a></li>#}
+        {#                        </ul>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </div>#}
     </div>
 
 

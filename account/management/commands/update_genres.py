@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
 
-import json
 import requests
 
 from account.models import PodcastGenre
@@ -11,16 +10,13 @@ class Command(BaseCommand):
     resp = None
 
     def parse_genres(self):
-        resp_data = json.loads(self.resp.content.decode('utf-8'))
-
-        for super_genre_key, super_genre_value in resp_data['26']['subgenres'].items():
+        for super_genre_key, super_genre_value in self.resp.json()['26']['subgenres'].items():
             obj, created = PodcastGenre.objects.update_or_create(id=int(super_genre_value['id']),
-                                                  defaults={
-                                                      'name': super_genre_value['name'],
-                                                      'is_active': True,
-                                                      'parent': None
-                                                  })
-            print('super: ', super_genre_value['id'])
+                                                                 defaults={
+                                                                     'name': super_genre_value['name'],
+                                                                     'is_active': True,
+                                                                     'parent': None
+                                                                 })
             if super_genre_value.get('subgenres', None):
                 for genre_key, genre_value in super_genre_value['subgenres'].items():
                     print('genre: ', genre_value['id'])
