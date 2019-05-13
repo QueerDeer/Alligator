@@ -44,9 +44,9 @@
             <div class="row">
                 <div class="col-12" data-aos="fade-down">
                     <div class="float-right">
-                        <a href="/account/login" class="mb-4"> Sign In </a>
+                        <a href="{% url 'sign in' %}" class="mb-4"> Sign In </a>
                         <span class="sep text-dark h5"> | </span>
-                        <a href="/account/register" class="mb-4"> Sign Up </a>
+                        <a href="{% url 'sign up' %}" class="mb-4"> Sign Up </a>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
 
 
                 <div class="col-3 align-self-center" data-aos="fade-down">
-                    <h1><a href="/" class="text-white h2">Alligator</a></h1>
+                    <h1><a href="{% url 'homepage' %}" class="text-white h2">Alligator</a></h1>
                 </div>
 
                 <div class="col-9 align-self-start" data-aos="fade-down">
@@ -67,7 +67,7 @@
 
                         <ul class="site-menu js-clone-nav d-none">
                             <li class="has-children active">
-                                <a href="podcast.html">Home</a>
+                                <a href="{% url 'homepage' %}">Home</a>
                                 <ul class="dropdown arrow-top">
                                     <li><a href="#">Menu One</a></li>
                                     <li><a href="#">Menu Two</a></li>
@@ -180,7 +180,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <div class="row">
+            <div class="row text-center">
                 <div class="col-lg-4">
                     <div class="mb-5">
                         <h3 class="footer-heading mb-4">About Alligator</h3>
