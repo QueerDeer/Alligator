@@ -58,43 +58,43 @@
     </div>
 
 
-    <div class="site-section bg-light">
-        <div class="container">
-
-            <div class="row mb-5" data-aos="fade-up">
-                <div class="col-md-12 text-center">
-                    <h2 class="font-weight-bold text-black">Artist of the month</h2>
-                </div>
-            </div>
-
-            {% for artist in artists %}
-                <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
-                    <a class="image" href="{% url 'current podcast' %}?feed={{ artist.feed_url }}" style="background-image: url({{ artist.artwork_url }});"></a>
-                    <div class="text">
-
-                        <h3 class="font-weight-light">
-                            <a href="{% url 'current podcast' %}?feed={{ artist.feed_url }}">
-                                {{ artist.collection_name }}
-                            </a>
-                        </h3>
-                        <div class="text-white mb-3">
-                        <span class="text-black-opacity-05">
-                            <small>{{ artist.artist_name }}
-                                <span class="sep">/</span>
-                                {{ artist.genre }}
-                            </small>
-                        </span>
-                        </div>
-                        <p class="mb-4">Podcast info:
-                            <a href={{ artist.collection_url }}>{{ artist.collection_url }}</a>
-                        </p>
-
-                    </div>
-                </div>
-            {% endfor %}
-
-        </div>
-    </div>
+{#    <div class="site-section bg-light">#}
+{#        <div class="container">#}
+{##}
+{#            <div class="row mb-5" data-aos="fade-up">#}
+{#                <div class="col-md-12 text-center">#}
+{#                    <h2 class="font-weight-bold text-black">Artist of the month</h2>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            {% for artist in artists %}#}
+{#                <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">#}
+{#                    <a class="image" href="{% url 'current podcast' %}?feed={{ artist.feed_url }}" style="background-image: url({{ artist.artwork_url }});"></a>#}
+{#                    <div class="text">#}
+{##}
+{#                        <h3 class="font-weight-light">#}
+{#                            <a href="{% url 'current podcast' %}?feed={{ artist.feed_url }}">#}
+{#                                {{ artist.collection_name }}#}
+{#                            </a>#}
+{#                        </h3>#}
+{#                        <div class="text-white mb-3">#}
+{#                        <span class="text-black-opacity-05">#}
+{#                            <small>{{ artist.artist_name }}#}
+{#                                <span class="sep">/</span>#}
+{#                                {{ artist.genre }}#}
+{#                            </small>#}
+{#                        </span>#}
+{#                        </div>#}
+{#                        <p class="mb-4">Podcast info:#}
+{#                            <a href={{ artist.collection_url }}>{{ artist.collection_url }}</a>#}
+{#                        </p>#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{##}
+{#        </div>#}
+{#    </div>#}
 
 
 
