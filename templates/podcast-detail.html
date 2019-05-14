@@ -84,7 +84,7 @@
                             <div class="image w-100" style="height: 300px; background-image: url({{ item.itune_image }});"></div>
                             <div class="text w-100">
 
-                                <h3 class="font-weight-light"><a href="{% url 'current episode' %}?feed={{ feed_url }}&episode=0">{{ item.title }}</a></h3>
+                                <h3 class="font-weight-light"><a href="{% url 'current episode' %}?feed={{ feed_url }}&episode={{ forloop.counter0 }}">{{ item.title }}</a></h3>
                                 <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{ item.itunes_author_name }} <span class="sep">/</span> {{ item.published_date }} <span class="sep">/</span> {{ item.itunes_duration }}</small></span></div>
                                 <p class="mb-4">{{ item.itunes_subtitle }}</p>
 
