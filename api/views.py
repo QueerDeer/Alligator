@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
 
 import requests
+from urllib.parse import unquote
 
 
 class Artist:
@@ -29,7 +30,7 @@ class ItunesSearchView(TemplateView):
                 for item in response['results']:
                     artists.append(
                         Artist(item['artistName'], item['collectionName'], item['artworkUrl600'], item['feedUrl'],
-                               item['primaryGenreName'], item['collectionViewUrl']))
+                               item['primaryGenreName'], unquote(item['collectionViewUrl'][:-5])))
 
         context.update({'artists': artists})
         return context
