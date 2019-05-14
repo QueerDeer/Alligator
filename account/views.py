@@ -70,3 +70,7 @@ class ProfilePageView(TemplateView):
         }
 
         return render(request, self.template_name, context)
+
+
+def subscribe(request):
+    pass

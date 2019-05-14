@@ -39,90 +39,16 @@
 
 
     <header class="site-navbar py-4 absolute transparent" role="banner">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-12" data-aos="fade-down">
-                    <div class="float-right">
-                        <a href="{% url 'sign in' %}" class="mb-4"> Sign In </a>
-                        <span class="sep text-dark h5"> | </span>
-                        <a href="{% url 'sign up' %}" class="mb-4"> Sign Up </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row align-items-center">
-
-
-                <div class="col-3 align-self-center" data-aos="fade-down">
-                    <h1><a href="{% url 'homepage' %}" class="text-white h2">Alligator</a></h1>
-                </div>
-
-                <div class="col-9 align-self-start" data-aos="fade-down">
-                    <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
-
-                        <div class="d-inline-block ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
-
-                        <ul class="site-menu js-clone-nav d-none">
-                            <li class="has-children active">
-                                <a href="{% url 'homepage' %}">Home</a>
-                                <ul class="dropdown arrow-top">
-                                    <li><a href="#">Menu One</a></li>
-                                    <li><a href="#">Menu Two</a></li>
-                                    <li><a href="#">Menu Three</a></li>
-                                    <li class="has-children">
-                                        <a href="#">Sub Menu</a>
-                                        <ul class="dropdown">
-                                            <li><a href="#">Menu One</a></li>
-                                            <li><a href="#">Menu Two</a></li>
-                                            <li><a href="#">Menu Three</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="has-children">
-                                <a href="#">Dropdown</a>
-                                <ul class="dropdown arrow-top">
-                                    <li><a href="#">Menu One</a></li>
-                                    <li><a href="#">Menu Two</a></li>
-                                    <li><a href="#">Menu Three</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-
-
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="container">
-            <div class="row align-items-center" data-aos="fade-down">
-                <div class="input-group col-12">
-                    <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search podcast" id="searchbar">
-                    <span class="input-group-append">
-                        <button class="btn btn-light border-left-0 border btn-sm small" type="submit" onclick="search()">
-                            <i class="icon-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-
+        {% include "header-user.html" %}
+        {% include "header-navigate.html" %}
     </header>
 
-    <div class="site-blocks-cover overlay inner-page-cover" style="background-image: url({% static 'images/hero_bg_2.jpg' %});" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover overlay inner-page-cover" style="background-image: url({{ current_item.itune_image }});" data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
-                    <h2 class="text-white font-weight-light mb-2 display-4">Episode 06: How To Create Web Page Using Bootstrap 4</h2>
-                    <div class="text-white mb-3"><span class="text-white-opacity-05"><small>By Mike Smith <span class="sep">/</span> 16 September 2017 <span class="sep">/</span> 1:30:20</small></span></div>
+                    <h2 class="text-white font-weight-light mb-2 display-4">{{ current_item.title }}</h2>
+                    <div class="text-white mb-3"><span class="text-white-opacity-05"><small>{{ current_item.itunes_author_name }} <span class="sep">/</span> {{ current_item.published_date }} <span class="sep">/</span> {{ current_item.itunes_duration }}</small></span></div>
                 </div>
             </div>
         </div>
@@ -132,24 +58,14 @@
 
         <div class="player mb-5">
             <audio id="player2" preload="none" controls style="max-width: 100%">
-                <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
+                <source src="{{ current_item.enclosure_url }}" type="audio/mp3">
             </audio>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-7">
-                <p><strong class="font-weight-bold font-weight-bold">Matt:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde labore fugit earum beatae, qui autem asperiores harum quibusdam nulla in suscipit iure consequatur, laborum, inventore libero odit rem, dolore. Itaque?</p>
-                <p><strong class="font-weight-bold font-weight-bold">John:</strong> Ea ipsum, libero exercitationem, quisquam magnam blanditiis facere sapiente sequi esse totam quaerat obcaecati ab ratione ex dignissimos quae ullam dolore veniam minima! Et accusamus distinctio ipsa. Hic, repellat blanditiis!</p>
-                <p><strong class="font-weight-bold font-weight-bold">John:</strong> Exactly!</p>
-                <p><strong class="font-weight-bold font-weight-bold">Matt:</strong> Nisi hic non odio repellendus quia saepe, aliquid, deleniti. Quas neque dolorum, aspernatur excepturi sapiente maxime cumque rerum veniam doloribus qui ad deserunt non nulla, iure incidunt sint sequi nesciunt.</p>
-                <p><strong class="font-weight-bold font-weight-bold">John:</strong> Maiores incidunt non esse doloremque. Ullam quidem aut aspernatur dolorem expedita, repellendus recusandae incidunt, laboriosam quaerat delectus dolorum minima doloribus ipsa facilis consequatur doloremque vero animi numquam, dolor illo! Facilis.</p>
-                <p><strong class="font-weight-bold font-weight-bold">Matt:</strong> Sit reprehenderit dolor expedita non temporibus veritatis, saepe odio obcaecati culpa reiciendis, similique eos hic iure, odit ut iusto magnam quo praesentium. Eos dolores reprehenderit eaque consectetur sequi dolore quis?</p>
-                <p><strong class="font-weight-bold font-weight-bold">John:</strong> Sequi amet itaque molestiae, odio nihil nemo aspernatur reiciendis veritatis, quis obcaecati deserunt minima natus. Odit, dolorem quisquam perferendis reprehenderit, cupiditate eos quaerat assumenda voluptates a debitis fugiat tempora, voluptatem.</p>
-                <p><strong class="font-weight-bold font-weight-bold">Matt:</strong> Necessitatibus veritatis natus facere sit tempore odit reiciendis magni non aliquam cupiditate est dicta impedit quam quos quae vero sed recusandae consectetur, eum praesentium itaque voluptas, reprehenderit ducimus assumenda. Doloribus.</p>
-                <p><strong class="font-weight-bold font-weight-bold">John:</strong> Neque aliquam, debitis quas repellat totam deleniti tempora cum temporibus? Dignissimos numquam, magnam fugiat odit, fugit exercitationem saepe dolores ipsum. Similique numquam sequi nulla hic fugiat maiores, commodi aperiam dolorum.</p>
-                <p><strong class="font-weight-bold font-weight-bold">Matt:</strong> Impedit, inventore, nesciunt? In laboriosam optio mollitia dolores temporibus deserunt, enim assumenda facilis quas blanditiis qui omnis unde nam nostrum dolorum totam repellendus saepe quidem ad aperiam delectus. Cum, aspernatur!</p>
-                <p><strong class="font-weight-bold font-weight-bold">John:</strong> Temporibus molestias in quae quasi officia quis obcaecati dolorem earum dignissimos voluptatum sunt aliquam laborum nesciunt deserunt beatae, ex possimus unde provident voluptates labore, exercitationem eius quisquam perspiciatis! Similique, facilis.</p>
-            </div>
+        <div class="col-md-12">
+            {% autoescape off %}
+                {{ current_item.itunes_summary }}
+            {% endautoescape %}
         </div>
 
     </div>
@@ -162,25 +78,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="d-block podcast-entry bg-white mb-5" data-aos="fade-up">
-                        <div class="image w-100" style="height: 300px; background-image: url({% static 'images/img_2.jpg' %});"></div>
-                        <div class="text w-100">
+                {% for item in recent_items %}
+                    <div class="col-md-6">
+                        <div class="d-block podcast-entry bg-white mb-5" data-aos="fade-up">
+                            <div class="image w-100" style="height: 300px; background-image: url({{ item.itune_image }});"></div>
+                            <div class="text w-100">
 
-                            <h3 class="font-weight-light"><a href="podcast-detail.html">Episode 07: How To Create Web Page Using Bootstrap 4</a></h3>
-                            <div class="text-white mb-3"><span class="text-black-opacity-05"><small>By Mike Smith <span class="sep">/</span> 16 September 2017 <span class="sep">/</span> 1:30:20</small></span></div>
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti repellat mollitia consequatur, optio nesciunt placeat. Iste voluptates excepturi tenetur, nesciunt.</p>
+                                <h3 class="font-weight-light"><a href="{% url 'current episode' %}?feed={{ feed_url }}&episode=0">{{ item.title }}</a></h3>
+                                <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{ item.itunes_author_name }} <span class="sep">/</span> {{ item.published_date }} <span class="sep">/</span> {{ item.itunes_duration }}</small></span></div>
+                                <p class="mb-4">{{ item.itunes_subtitle }}</p>
 
 
-                            <div class="player">
-                                <audio id="player2" preload="none" controls style="max-width: 100%">
-                                    <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
-                                </audio>
+                                <div class="player">
+                                    <audio id="player2" preload="none" controls style="max-width: 100%">
+                                        <source src="{{ item.enclosure_url }}" type="audio/mp3">
+                                    </audio>
+                                </div>
+
                             </div>
-
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -188,28 +106,8 @@
 
 
 
-    <footer class="site-footer border-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="mb-5">
-                        <h3 class="footer-heading mb-4">About Alligator</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe pariatur reprehenderit vero atque, consequatur id ratione, et non dignissimos culpa? Ut veritatis, quos illum totam quis blanditiis, minima minus odio!</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-
-            </div>
-        </div>
+    <footer class="site-footer">
+        {% include "footer.html" %}
     </footer>
 </div>
 

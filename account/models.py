@@ -20,13 +20,14 @@ class PodcastGenre(models.Model):
 
 class Podcast(models.Model):
     id = models.IntegerField(primary_key=True)
+    author_id = models.IntegerField()
+    author = models.CharField(max_length=256)
+    title = models.CharField(max_length=256)
+    description = models.TextField()
     feed_url = models.URLField(default=None)
     primary_genre = models.OneToOneField(PodcastGenre, on_delete=models.CASCADE)
     genres = models.ManyToManyField(PodcastGenre, related_name='genres')
-    art_url_30 = models.URLField(default=None)
-    art_url_60 = models.URLField(default=None)
-    art_url_100 = models.URLField(default=None)
-    art_url_600 = models.URLField(default=None)
+    image_url = models.URLField(default=None)
 
     class Meta:
         db_table = 'podcasts'
