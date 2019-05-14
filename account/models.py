@@ -18,15 +18,26 @@ class PodcastGenre(models.Model):
         verbose_name_plural = 'Podcast Genres'
 
 
+# class Podcast(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     author_id = models.IntegerField()
+#     author = models.CharField(max_length=256)
+#     title = models.CharField(max_length=256)
+#     description = models.TextField()
+#     feed_url = models.URLField(default=None)
+#     primary_genre = models.OneToOneField(PodcastGenre, on_delete=models.CASCADE)
+#     genres = models.ManyToManyField(PodcastGenre, related_name='genres')
+#     image_url = models.URLField(default=None)
+#
+#     class Meta:
+#         db_table = 'podcasts'
+#         verbose_name = 'Podcast'
+#         verbose_name_plural = 'Podcasts'
+
 class Podcast(models.Model):
-    id = models.IntegerField(primary_key=True)
-    author_id = models.IntegerField()
-    author = models.CharField(max_length=256)
-    title = models.CharField(max_length=256)
-    description = models.TextField()
+    title = models.CharField(max_length=256, default=None)
+    description = models.TextField(default=None)
     feed_url = models.URLField(default=None)
-    primary_genre = models.OneToOneField(PodcastGenre, on_delete=models.CASCADE)
-    genres = models.ManyToManyField(PodcastGenre, related_name='genres')
     image_url = models.URLField(default=None)
 
     class Meta:
