@@ -4,6 +4,11 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib.auth.models import User
 
+import uuid
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from .forms import RegisterForm
 from .models import Profile, Podcast, PodcastGenre
 
@@ -80,21 +85,29 @@ class ProfilePageView(TemplateView):
 from django.http import HttpResponse
 def subscribe(request):
     feed_url = request.GET.get('feed')
-
-    if not Podcast.objects.filter(feed_url=feed_url).exists():
-        podcast = PyPodcast(requests.get(feed_url).content)
-        title = podcast.title
-    else:
-        title = Podcast.objects.get(feed_url=feed_url).title
+    id = uuid.uuid3(uuid.NAMESPACE_DNS, feed_url)
 
     try:
-        p = Podcast.objects.get(title=title)
+        p = Podcast.objects.get(id=id)
     except Podcast.DoesNotExist:
-        p = Podcast.objects.create(title=title,
+        podcast = PyPodcast(requests.get(feed_url).content)
+        if podcast.itunes_categories:
+            try:
+                primary_genre = PodcastGenre.objects.get(name=podcast.itunes_categories[0])
+            except PodcastGenre.DoesNotExist:
+                primary_genre = None
+        else:
+            primary_genre = None
+
+        p = Podcast.objects.create(id=id,
+                                   author=podcast.itunes_author_name,
+                                   title=podcast.title,
                                    description=podcast.description,
                                    feed_url=feed_url,
+                                   primary_genre=primary_genre,
                                    image_url=podcast.itune_image)
-        p.save()
+        # p.save()
+
     try:
         profile = Profile.objects.get(user=request.user)
         profile.subscribes.add(p)
@@ -103,3 +116,21 @@ def subscribe(request):
         pass
 
     return HttpResponse()
+
+
+@receiver(post_save, sender=Podcast, dispatch_uid='update_podcast_listeners')
+def update_podcast_listeners(sender, instance, **kwargs):
+    """
+        Update Podcast.genres, when its saved to db
+    """
+    title = instance.title
+    feed_url = instance.feed_url
+    response = requests.get('https://itunes.apple.com/search?term={}&entity=podcast'.format(title), timeout=(21, 21))
+
+    if response.ok:
+        response = response.json()
+        if response['resultCount']:
+            info = next(item for item in response['results'] if item['feedUrl'] == feed_url)
+            genres = [int(x) for x in info['genreIds']]
+            for genre in genres:
+                instance.genres.add(PodcastGenre.objects.get(id=genre))
