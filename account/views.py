@@ -81,8 +81,11 @@ from django.http import HttpResponse
 def subscribe(request):
     feed_url = request.GET.get('feed')
 
-    podcast = PyPodcast(requests.get(feed_url).content)
-    title = podcast.title
+    if not Podcast.objects.filter(feed_url=feed_url).exists():
+        podcast = PyPodcast(requests.get(feed_url).content)
+        title = podcast.title
+    else:
+        title = Podcast.objects.get(feed_url=feed_url).title
 
     try:
         p = Podcast.objects.get(title=title)
