@@ -71,15 +71,18 @@ class ProfilePageView(TemplateView):
     template_name = "user_profile.html"
 
     def dispatch(self, request, *args, **kwargs):
-        try:
-            profile = Profile.objects.get(user=request.user)
-            context = {
-                'subscriptions': profile.subscribes.all()
-            }
-        except Profile.DoesNotExist:
-            context = {}
+        if request.user.is_authenticated:
+            try:
+                profile = Profile.objects.get(user=request.user)
+                context = {
+                    'subscriptions': profile.subscribes.all()
+                }
+            except Profile.DoesNotExist:
+                context = {}
 
-        return render(request, self.template_name, context)
+            return render(request, self.template_name, context)
+        else:
+            return redirect('sign in')
 
 
 from django.http import HttpResponse
