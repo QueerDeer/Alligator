@@ -81,29 +81,35 @@
                 </div>
             </div>
 
-            {% for artist in artists %}
+            {% for subscription in subscriptions %}
                 <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
-                    <a class="image" href="{% url 'current podcast' %}?feed={{ artist.feed_url }}" style="background-image: url({{ artist.artwork_url }});"></a>
+                    <a class="image" href="{% url 'current podcast' %}?feed={{ subscription.feed_url }}" style="background-image: url({{ subscription.image_url }});"></a>
                     <div class="text">
 
                         <h3 class="font-weight-light">
-                            <a href="{% url 'current podcast' %}?feed={{ artist.feed_url }}">
-                                {{ artist.collection_name }}
+                            <a href="{% url 'current podcast' %}?feed={{ subscription.feed_url }}">
+                                {{ subscription.title }}
                             </a>
                         </h3>
                         <div class="text-white mb-3">
                         <span class="text-black-opacity-05">
-                            <small>{{ artist.artist_name }}
+                            <small>
+                                <a href="{% url 'itunes search' %}?term={{ subscription.author|lower }}#begin" style="color: rgba(0, 0, 0, 0.5)">
+                                {{ subscription.author }}
+                                </a>
                                 <span class="sep">/</span>
-                                {{ artist.genre }}
-                                <span class="sep">/</span>
-                                {{ artist.country }}
+
+                                {% for genre in subscription.genres.all %}
+                                    {{ genre.name }}
+
+                                    {% if not forloop.last %}
+                                        <span class="sep">|</span>
+                                    {% endif %}
+                                {% endfor %}
                             </small>
                         </span>
                         </div>
-                        <p class="mb-4">Podcast info:
-                            <a href={{ artist.collection_url }}>{{ artist.collection_url }}</a>
-                        </p>
+                        <p class="mb-4">{{ subscription.description }}</p>
 
                     </div>
                 </div>

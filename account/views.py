@@ -74,7 +74,7 @@ class ProfilePageView(TemplateView):
         try:
             profile = Profile.objects.get(user=request.user)
             context = {
-                'subscriptions': profile.subscribes
+                'subscriptions': profile.subscribes.all()
             }
         except Profile.DoesNotExist:
             context = {}
@@ -106,7 +106,6 @@ def subscribe(request):
                                    feed_url=feed_url,
                                    primary_genre=primary_genre,
                                    image_url=podcast.itune_image)
-        # p.save()
 
     try:
         profile = Profile.objects.get(user=request.user)
@@ -133,4 +132,5 @@ def update_podcast_listeners(sender, instance, **kwargs):
             info = next(item for item in response['results'] if item['feedUrl'] == feed_url)
             genres = [int(x) for x in info['genreIds']]
             for genre in genres:
-                instance.genres.add(PodcastGenre.objects.get(id=genre))
+                if genre != 26:
+                    instance.genres.add(PodcastGenre.objects.get(id=genre))
