@@ -34,18 +34,6 @@ class Podcast(models.Model):
         verbose_name = 'Podcast'
         verbose_name_plural = 'Podcasts'
 
-# class Podcast(models.Model):
-#     title = models.CharField(max_length=256, default=None)
-#     description = models.TextField(default=None)
-#     feed_url = models.URLField(default=None)
-#     image_url = models.URLField(default=None)
-#
-#     class Meta:
-#         db_table = 'podcasts'
-#         verbose_name = 'Podcast'
-#         verbose_name_plural = 'Podcasts'
-
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=u"Пользователь")
     # avatar = models.FileField(verbose_name=u"Аватар", default='static/images/default_avatar.jpg')

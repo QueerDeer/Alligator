@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.shortcuts import redirect
 
 import requests
 from urllib.parse import unquote
@@ -12,6 +13,13 @@ class Artist:
         self.feed_url = feed_url
         self.genre = genre
         self.collection_url = collection_url
+
+
+class PodcastInfo:
+    def __init__(self, title, image_url, summary):
+        self.title = title
+        self.image = image_url
+        self.summary = summary
 
 
 class ItunesSearchView(TemplateView):
@@ -34,3 +42,35 @@ class ItunesSearchView(TemplateView):
 
         context.update({'artists': artists})
         return context
+
+
+class TopByGenreView(TemplateView):
+    template_name = "home.html"
+
+    def get_context_data(self, **kwargs):
+        genre = self.request.GET.get('genre', default=None)
+        podcasts = []
+
+        context = super(TopByGenreView, self).get_context_data(**kwargs)
+        response = requests.get('https://itunes.apple.com/ru/rss/toppodcasts/genre={}/limit=100/json'.format(genre), timeout=(21, 21))
+
+        if response.ok:
+            response = response.json()
+            if response.get('feed', {}).get('entry', []):
+                for item in response['feed']['entry']:
+                    podcasts.append(
+                        PodcastInfo(item['im:name']['label'],
+                                    item['im:image'][-1]['label'].replace('170x170bb-85.png', '330x330bb-85.png'),
+                                    item.get('summary', {}).get('label', ''))
+                    )
+
+        context.update({'podcasts': podcasts})
+        return context
+
+
+def redirect_to_podcast_by_name(title: str):
+    response = requests.get('https://itunes.apple.com/search?term={}&entity=podcast'.format(title), timeout=(21, 21))
+    if response.ok:
+        response = response.json()
+        if response['resultCount']:
+            return redirect('current podcast', feed=response['results'][0]['feed_url'])
