@@ -307,7 +307,8 @@ body {
 }
 
 .signup-content {
-    padding: 75px 0;
+    padding-top: 75px;
+    padding-bottom: 40px;
 }
 
 .signup-form, .signup-image, .signin-form, .signin-image {
@@ -598,7 +599,7 @@ label.valid:after {
 
 .signin-content {
     padding-top: 67px;
-    padding-bottom: 87px;
+    padding-bottom: 52px;
 }
 
 .social-login {

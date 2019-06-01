@@ -3,7 +3,8 @@
 }
 .signup-content {
     @extend display-flex;
-    padding: 75px 0;
+    padding-top: 75px;
+    padding-bottom: 40px;
     // flex-flow: wrap;
 }
 .signup-form, .signup-image, .signin-form, .signin-image{
@@ -188,7 +189,7 @@ label.valid {
 .signin-content {
     @extend display-flex;
     padding-top: 67px;
-    padding-bottom: 87px;
+    padding-bottom: 52px;
     // padding: 67px 0;
 }
 .signin-form {
