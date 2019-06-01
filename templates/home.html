@@ -72,24 +72,24 @@
         <div class="container" data-aos="fade-up">
             <div class="row mb-5">
                 <div class="col-md-12 text-center">
-                    <h2 class="font-weight-bold text-black">Behind The Mic</h2>
+                    <h2 class="font-weight-bold text-black">Top {{ genre }} Podcasts</h2>
                 </div>
             </div>
 
             <div class="row">
 
-                {% for artist, podcast in zipped_info %}
+                {% for podcast in podcasts %}
                     <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
                         <div class="team-member">
 
-                            <img src={{ artist.artwork_url }} alt="Image" class="img-fluid">
+                            <img src={{ podcast.image }} alt="Image" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;">
 
                             <div class="text">
 
-                                <h2 class="mb-2 font-weight-light h4">{{ artist.artist_name }}</h2>
-                                <span class="d-block mb-2 text-white-opacity-05">{{ artist.collection_name }}</span>
-                                <p class="mb-4" style="overflow: hidden; text-overflow: ellipsis; line-height: 24px; max-height: 168px; {% if not podcast.description %}opacity:0;{% endif %}">
-                                    {{ podcast.description|default:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." }}</p>
+                                <h2 class="mb-2 font-weight-light h4">{{ podcast.title }}</h2>
+                                <span class="d-block mb-2 text-white-opacity-05">{{ podcast.author }}</span>
+                                <p class="mb-4" style="overflow: hidden; text-overflow: ellipsis; line-height: 24px; max-height: 168px; {% if not podcast.summary %}opacity:0;{% endif %}">
+                                    {{ podcast.summary|default:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." }}</p>
                             </div>
 
                         </div>

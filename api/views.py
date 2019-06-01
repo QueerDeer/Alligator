@@ -4,6 +4,8 @@ from django.shortcuts import redirect
 import requests
 from urllib.parse import unquote
 
+from account.models import PodcastGenre
+
 
 class Artist:
     def __init__(self, artist_name, collection_name, artwork_url, feed_url, genre, collection_url):
@@ -16,8 +18,9 @@ class Artist:
 
 
 class PodcastInfo:
-    def __init__(self, title, image_url, summary):
+    def __init__(self, title, author, image_url, summary):
         self.title = title
+        self.author = author
         self.image = image_url
         self.summary = summary
 
@@ -49,10 +52,15 @@ class TopByGenreView(TemplateView):
 
     def get_context_data(self, **kwargs):
         genre = self.request.GET.get('genre', default=None)
+        try:
+            genre_str = PodcastGenre.objects.get(id=int(genre)).name
+        except PodcastGenre.DoesNotExist:
+            genre_str = ''
+
         podcasts = []
 
         context = super(TopByGenreView, self).get_context_data(**kwargs)
-        response = requests.get('https://itunes.apple.com/ru/rss/toppodcasts/genre={}/limit=100/json'.format(genre), timeout=(21, 21))
+        response = requests.get('https://itunes.apple.com/ru/rss/toppodcasts/genre={}/limit=102/json'.format(genre), timeout=(21, 21))
 
         if response.ok:
             response = response.json()
@@ -60,11 +68,12 @@ class TopByGenreView(TemplateView):
                 for item in response['feed']['entry']:
                     podcasts.append(
                         PodcastInfo(item['im:name']['label'],
+                                    item['im:artist']['label'],
                                     item['im:image'][-1]['label'].replace('170x170bb-85.png', '330x330bb-85.png'),
                                     item.get('summary', {}).get('label', ''))
                     )
 
-        context.update({'podcasts': podcasts})
+        context.update({'podcasts': podcasts, 'genre': genre_str})
         return context
 
 
