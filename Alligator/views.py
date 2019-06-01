@@ -21,19 +21,26 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         term = 'disgustingmen'
         artists = []
+        podcasts = []
 
         context = super(HomeView, self).get_context_data(**kwargs)
 
-        response = requests.get('https://itunes.apple.com/search?term={}&entity=podcast'.format(term), timeout=(21, 21))
-        if response.ok:
-            response = response.json()
-            if response['resultCount']:
-                for item in response['results']:
+        response_api = requests.get('https://itunes.apple.com/search?term={}&entity=podcast'.format(term), timeout=(21, 21))
+
+        if response_api.ok:
+            response_api = response_api.json()
+            if response_api['resultCount']:
+                for item in response_api['results']:
+
                     artists.append(
                         Artist(item['artistName'], item['collectionName'], item['artworkUrl600'], item['feedUrl'],
                                item['primaryGenreName'], unquote(item['collectionViewUrl'][:-5])))
 
-        context.update({'artists': artists})
+                    response_pypod = requests.get(item['feedUrl'], timeout=(21, 21))
+                    podcasts.append(Podcast(response_pypod.content))
+
+        zipped_info = zip(artists, podcasts)
+        context.update({'zipped_info': zipped_info})
         return context
 
 
