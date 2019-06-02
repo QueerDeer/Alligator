@@ -79,9 +79,18 @@
         {% endautoescape %}
         </div>
 
-        <div class="float-right" style="padding-top: 32px; margin-right: 24px;">
-            <a href="#" class="btn btn-primary btn-sm py-1 px-2 small">Subscribe +</a>
-        </div>
+        {% load with_feedurl %}
+        {% if user.is_authenticated %}
+            {% if not user.profile.subscribes|with_feedurl:feed_url %}
+                <div class="float-right" style="padding-top: 32px; margin-right: 24px;">
+                    <a href="#" id="subbutton0" class="btn btn-primary btn-sm py-1 px-2 small" onclick="button_sub(0)">Subscribe +</a>
+                </div>
+                {% else %}
+                <div class="float-right" style="padding-top: 32px; margin-right: 24px;">
+                    <a href="#" id="unsubbutton0" class="btn btn-secondary btn-sm py-1 px-2 small" onclick="button_unsub(0)">unsubscribe</a>
+                </div>
+            {% endif %}
+        {% endif %}
 
     </div>
 

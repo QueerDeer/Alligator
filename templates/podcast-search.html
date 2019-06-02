@@ -85,7 +85,14 @@
                     <h3 class="font-weight-light"><a href={% url 'current podcast' %}?feed={{ artist.feed_url }}>{{ artist.collection_name }}</a></h3>
                     <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{ artist.artist_name }} <span class="sep">/</span> {{ artist.genre }} </small></span></div>
                     <p class="mb-4">Podcast info: <a href={{ artist.collection_url }}>{{ artist.collection_url }}</a></p>
-                    <a href="#" class="btn btn-primary btn-sm py-0 px-1 small float-right">Subscribe +</a>
+                    {% load with_feedurl %}
+                    {% if user.is_authenticated %}
+                        {% if not user.profile.subscribes|with_feedurl:artist.feed_url %}
+                            <a href="#" id="subbutton{{ forloop.counter0 }}" class="btn btn-primary btn-sm py-0 px-1 small float-right" onclick="button_sub({{ forloop.counter0 }})">Subscribe +</a>
+                        {% else %}
+                            <a href="#"  id="unsubbutton{{ forloop.counter0 }}" class="btn btn-secondary btn-sm py-0 px-1 small float-right" onclick="button_unsub({{ forloop.counter0 }})">unsubscribe</a>
+                        {% endif %}
+                    {% endif %}
 
                 </div>
             </div>

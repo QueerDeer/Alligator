@@ -241,3 +241,15 @@ function search()
 	var url = "//" + window.location.host + "/api/search?term=" + searchInput + "#begin";
 	window.open(url, "_self");
 }
+
+function button_sub(value) {
+  var subbutton = document.querySelector('#subbutton' + value);
+  subbutton.classList.add('disabled');
+  subbutton.text = "Subscribed"
+}
+
+function button_unsub(value) {
+  var unsubbutton = document.querySelector('#unsubbutton' + value);
+  unsubbutton.classList.add('disabled');
+  unsubbutton.text = "Unsubscribed"
+}
