@@ -60,10 +60,6 @@ class PodcastView(TemplateView):
             response = requests.get(feed_url)
             podcast = Podcast(response.content)
             if podcast.items:
-                for item in podcast.items:
-                    if not item.itune_image:
-                        item.itune_image = podcast.itune_image
-
                 context.update({'podcast': podcast})
                 context.update({'feed_url': feed_url})
 
@@ -83,10 +79,7 @@ class PodcastDetailView(TemplateView):
             response = requests.get(feed_url)
             podcast = Podcast(response.content)
             if podcast.items:
-                for item in podcast.items:
-                    if not item.itune_image:
-                        item.itune_image = podcast.itune_image
-
+                context.update({'podcast': {'itune_image': podcast.itune_image, 'itunes_author_name': podcast.itunes_author_name}})
                 context.update({'current_item': podcast.items[episode_n]})
                 context.update({'recent_items': podcast.items[episode_n+1:episode_n + 3]})
                 context.update({'feed_url': feed_url})

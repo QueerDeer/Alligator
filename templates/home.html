@@ -83,7 +83,7 @@
                         <div class="team-member">
 
                             <img src={{ podcast.image }} alt="Image" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;">
-                            <a class="image" href="{% url 'redirect to podcast by name' %}?title={{ podcast.title }}" style="text-decoration: none;">
+                            <a class="image" href="{% url 'redirect to podcast by name' %}?title={{ podcast.title|cut:'#' }}" style="text-decoration: none;">
                                 <div class="text">
 
                                     <h2 class="mb-2 font-weight-light h4">{{ podcast.title }}</h2>
