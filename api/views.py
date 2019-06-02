@@ -77,9 +77,11 @@ class TopByGenreView(TemplateView):
         return context
 
 
-def redirect_to_podcast_by_name(title: str):
+def redirect_to_podcast_by_name(request):
+    title = request.GET.get('title')
+
     response = requests.get('https://itunes.apple.com/search?term={}&entity=podcast'.format(title), timeout=(21, 21))
     if response.ok:
         response = response.json()
         if response['resultCount']:
-            return redirect('current podcast', feed=response['results'][0]['feed_url'])
+            return redirect('/podcast?feed={}'.format(response['results'][0]['feedUrl']))
