@@ -62,7 +62,7 @@
                     <div class="text-white mb-3">
                         <span class="text-white-opacity-05">
                             <small>
-                                <a href="{% url 'itunes search' %}?term={{ current_item.itunes_author_name|lower|default:podcast.itunes_author_name }}#begin" style="color: rgba(255, 255, 255, 0.5);">
+                                <a href="{% url 'itunes search' %}?term={{ current_item.itunes_author_name|lower|default:podcast.itunes_author_name|cut:'#' }}#begin" style="color: rgba(255, 255, 255, 0.5);">
                                     {{ current_item.itunes_author_name|default:podcast.itunes_author_name }}
                                 </a>
                                 <span class="sep">/</span>
@@ -126,7 +126,7 @@
                                 <div class="text-white mb-3">
                                     <span class="text-black-opacity-05">
                                         <small>
-                                            <a href="{% url 'itunes search' %}?term={{ item.itunes_author_name|lower|default:podcast.itunes_author_name }}#begin" style="color: rgba(0, 0, 0, 0.5);">
+                                            <a href="{% url 'itunes search' %}?term={{ item.itunes_author_name|lower|default:podcast.itunes_author_name|cut:'#' }}#begin" style="color: rgba(0, 0, 0, 0.5);">
                                                 {{ item.itunes_author_name|default:podcast.itunes_author_name }}
                                             </a>
                                             <span class="sep">/</span>

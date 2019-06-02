@@ -94,7 +94,7 @@
                         <div class="text-white mb-3">
                         <span class="text-black-opacity-05">
                             <small>
-                                <a href="{% url 'itunes search' %}?term={{ subscription.author|lower }}#begin" style="color: rgba(0, 0, 0, 0.5)">
+                                <a href="{% url 'itunes search' %}?term={{ subscription.author|lower|cut:'#' }}#begin" style="color: rgba(0, 0, 0, 0.5)">
                                     {{ subscription.author }}
                                 </a>
                                 <span class="sep">/</span>

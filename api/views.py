@@ -41,7 +41,7 @@ class ItunesSearchView(TemplateView):
                 for item in response['results']:
                     artists.append(
                         Artist(item['artistName'], item['collectionName'], item['artworkUrl600'], item['feedUrl'],
-                               item['primaryGenreName'], unquote(item['collectionViewUrl'][:-5])))
+                               zip(item['genreIds'], item['genres']), unquote(item['collectionViewUrl'][:-5])))
 
         context.update({'artists': artists})
         return context
