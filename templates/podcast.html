@@ -64,7 +64,6 @@
                     </div>
                     <p><a href="{% url 'current episode' %}?feed={{ feed_url }}&episode=0" class="btn btn-primary btn-sm py-3 px-4 small">Read The
                         Transcript</a></p>
-{#                    <p><a href="#" class="btn btn-primary btn-sm py-3 px-4 small">Subscribe</a></p>#}
 
                     <div class="player">
                         <audio id="player2" preload="none" controls style="max-width: 100%">
@@ -77,12 +76,16 @@
         </div>
     </div>
 
+    <div class="container">
+        <div class="float-right" style="padding-top: 24px; margin-right: 6px;">
+            <a href="#" class="btn btn-primary btn-sm py-2 px-3 small">Subscribe +</a>
+        </div>
+    </div>
 
     <div class="site-section bg-light">
         <div class="container">
-
             <div class="row mb-5" data-aos="fade-up">
-                <div class="col-md-12 text-center">
+                <div class="col-12 text-center">
                     <h2 class="font-weight-bold text-black">Recent Podcasts</h2>
                 </div>
             </div>
