@@ -1,7 +1,7 @@
 from account.models import PodcastGenre
 
 
-def genre_tree():
+def genre_tree(request):
     root = PodcastGenre.objects.get(parent__isnull=True)
     res = {
         'id':       root.id,
@@ -29,4 +29,4 @@ def genre_tree():
                 'name': super_genre.name
             })
 
-    return res
+    return {'genre_tree': res}

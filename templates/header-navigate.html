@@ -12,32 +12,36 @@
                 <div class="d-inline-block ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
 
                 <ul class="site-menu js-clone-nav d-none">
-                    <li class="has-children active">
+                    <li class="active">
                         <a href="{% url 'homepage' %}">Home</a>
-                        <ul class="dropdown arrow-top">
-                            <li><a href="#">Menu One</a></li>
-                            <li><a href="#">Menu Two</a></li>
-                            <li><a href="#">Menu Three</a></li>
-                            <li class="has-children">
-                                <a href="#">Sub Menu</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Menu One</a></li>
-                                    <li><a href="#">Menu Two</a></li>
-                                    <li><a href="#">Menu Three</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                     </li>
                     <li class="has-children">
-                        <a href="#">Dropdown</a>
+                        <a href="{% url 'top podcasts by genre' %}?genre={{ genre_tree.id }}">{{ genre_tree.name }}</a>
                         <ul class="dropdown arrow-top">
-                            <li><a href="#">Menu One</a></li>
-                            <li><a href="#">Menu Two</a></li>
-                            <li><a href="#">Menu Three</a></li>
+                            {% for super_genre in genre_tree.children %}
+                                {% if super_genre.children %}
+                                    <li class="has-children">
+                                        <a href="{% url 'top podcasts by genre' %}?genre={{ super_genre.id }}">{{ super_genre.name }}</a>
+                                        <ul class="dropdown arrow-top">
+                                            {% for genre in super_genre.children %}
+                                                <li>
+                                                    <a href="{% url 'top podcasts by genre' %}?genre={{ genre.id }}">{{ genre.name }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+
+                                {% else %}
+                                    <li>
+                                        <a href="{% url 'top podcasts by genre' %}?genre={{ super_genre.id }}">{{ super_genre.name }}</a>
+                                    </li>
+                                {% endif %}
+
+                            {% endfor %}
                         </ul>
                     </li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+{#                    <li><a href="about.html">About</a></li>#}
+{#                    <li><a href="contact.html">Contact</a></li>#}
                 </ul>
             </nav>
 
