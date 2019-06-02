@@ -95,12 +95,14 @@
                         <span class="text-black-opacity-05">
                             <small>
                                 <a href="{% url 'itunes search' %}?term={{ subscription.author|lower }}#begin" style="color: rgba(0, 0, 0, 0.5)">
-                                {{ subscription.author }}
+                                    {{ subscription.author }}
                                 </a>
                                 <span class="sep">/</span>
 
                                 {% for genre in subscription.genres.all %}
-                                    {{ genre.name }}
+                                    <a href="{% url 'top podcasts by genre' %}?genre={{ genre.id }}#begin" style="color: rgba(0, 0, 0, 0.5)">
+                                        {{ genre.name }}
+                                    </a>
 
                                     {% if not forloop.last %}
                                         <span class="sep">|</span>

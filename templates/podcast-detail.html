@@ -59,7 +59,19 @@
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
                     <h2 class="text-white font-weight-light mb-2 display-4">{{ current_item.title }}</h2>
-                    <div class="text-white mb-3"><span class="text-white-opacity-05"><small>{{ current_item.itunes_author_name }} <span class="sep">/</span> {{ current_item.published_date }} <span class="sep">/</span> {{ current_item.itunes_duration }}</small></span></div>
+                    <div class="text-white mb-3">
+                        <span class="text-white-opacity-05">
+                            <small>
+                                <a href="{% url 'itunes search' %}?term={{ current_item.itunes_author_name|lower }}#begin" style="color: rgba(255, 255, 255, 0.5);">
+                                    {{ current_item.itunes_author_name }}
+                                </a>
+                                <span class="sep">/</span>
+                                {{ current_item.published_date }}
+                                <span class="sep">/</span>
+                                {{ current_item.itunes_duration }}
+                            </small>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,7 +123,19 @@
                             <div class="text w-100">
 
                                 <h3 class="font-weight-light"><a href="{% url 'current episode' %}?feed={{ feed_url }}&episode={{ forloop.counter0 }}">{{ item.title }}</a></h3>
-                                <div class="text-white mb-3"><span class="text-black-opacity-05"><small>{{ item.itunes_author_name }} <span class="sep">/</span> {{ item.published_date }} <span class="sep">/</span> {{ item.itunes_duration }}</small></span></div>
+                                <div class="text-white mb-3">
+                                    <span class="text-black-opacity-05">
+                                        <small>
+                                            <a href="{% url 'itunes search' %}?term={{ item.itunes_author_name|lower }}#begin" style="color: rgba(0, 0, 0, 0.5);">
+                                                {{ item.itunes_author_name }}
+                                            </a>
+                                            <span class="sep">/</span>
+                                            {{ item.published_date }}
+                                            <span class="sep">/</span>
+                                            {{ item.itunes_duration }}
+                                        </small>
+                                    </span>
+                                </div>
                                 <p class="mb-4">{{ item.itunes_subtitle }}</p>
 
 
