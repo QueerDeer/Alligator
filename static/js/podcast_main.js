@@ -242,14 +242,20 @@ function search()
 	window.open(url, "_self");
 }
 
-function button_sub(value) {
+function button_sub(value, feedUrl) {
   var subbutton = document.querySelector('#subbutton' + value);
+
   subbutton.classList.add('disabled');
-  subbutton.text = "Subscribed"
+  subbutton.text = "Subscribed";
+
+  window.fetch("/account/subscribe?feed=" + feedUrl)
 }
 
-function button_unsub(value) {
+function button_unsub(value, feedUrl) {
   var unsubbutton = document.querySelector('#unsubbutton' + value);
+
   unsubbutton.classList.add('disabled');
-  unsubbutton.text = "Unsubscribed"
+  unsubbutton.text = "Unsubscribed";
+
+  window.fetch("/account/unsubscribe?feed=" + feedUrl)
 }

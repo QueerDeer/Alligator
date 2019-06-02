@@ -10,5 +10,6 @@ urlpatterns = [
 
     re_path(r'^account/profile/$', ProfilePageView.as_view(), name="profile"),
 
-    re_path(r'^account/test/$', subscribe)
+    re_path(r'^account/subscribe$', subscribe, name="subscribe"),
+    re_path(r'^account/unsubscribe$', unsubscribe, name="unsubscribe")
 ]

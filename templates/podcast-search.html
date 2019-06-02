@@ -88,9 +88,13 @@
                     {% load with_feedurl %}
                     {% if user.is_authenticated %}
                         {% if not user.profile.subscribes|with_feedurl:artist.feed_url %}
-                            <a href="#" id="subbutton{{ forloop.counter0 }}" class="btn btn-primary btn-sm py-0 px-1 small float-right" onclick="button_sub({{ forloop.counter0 }})">Subscribe +</a>
+                            <a id="subbutton{{ forloop.counter0 }}"
+                               class="btn text-white btn-primary btn-sm py-0 px-1 small float-right"
+                               onclick="button_sub({{ forloop.counter0 }}, '{{ artist.feed_url }}')">Subscribe +</a>
                         {% else %}
-                            <a href="#"  id="unsubbutton{{ forloop.counter0 }}" class="btn btn-secondary btn-sm py-0 px-1 small float-right" onclick="button_unsub({{ forloop.counter0 }})">unsubscribe</a>
+                            <a id="unsubbutton{{ forloop.counter0 }}"
+                               class="btn btn-secondary btn-sm py-0 px-1 small float-right"
+                               onclick="button_unsub({{ forloop.counter0 }}, '{{ artist.feed_url }}')">unsubscribe</a>
                         {% endif %}
                     {% endif %}
 

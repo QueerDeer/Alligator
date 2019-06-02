@@ -81,13 +81,15 @@
         {% if not user.profile.subscribes|with_feedurl:feed_url %}
             <div class="container">
                 <div class="float-right" style="padding-top: 24px; margin-right: 6px;">
-                    <a href="#" id="subbutton0" class="btn btn-primary btn-sm py-2 px-3 small" onclick="button_sub(0)">Subscribe +</a>
+                    <a id="subbutton0" class="btn text-white btn-primary btn-sm py-2 px-3 small"
+                       onclick="button_sub(0, '{{ feed_url }}')">Subscribe +</a>
                 </div>
             </div>
         {% else %}
             <div class="container">
                 <div class="float-right" style="padding-top: 24px; margin-right: 6px;">
-                    <a href="#" id="unsubbutton0" class="btn btn-secondary btn-sm py-2 px-3 small" onclick="button_unsub(0)">unsubscribe</a>
+                    <a id="unsubbutton0" class="btn btn-secondary btn-sm py-2 px-3 small"
+                       onclick="button_unsub(0, '{{ feed_url }}')">unsubscribe</a>
                 </div>
             </div>
         {% endif %}
