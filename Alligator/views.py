@@ -60,8 +60,8 @@ class PodcastView(TemplateView):
             response = requests.get(feed_url)
             podcast = Podcast(response.content)
             if podcast.items:
-                if not podcast.items[0].itune_image:
-                    for item in podcast.items:
+                for item in podcast.items:
+                    if not item.itune_image:
                         item.itune_image = podcast.itune_image
 
                 context.update({'podcast': podcast})
