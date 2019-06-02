@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib.auth.models import User
 
+from django.http import HttpResponse
 import uuid
 
 from django.db.models.signals import post_save
@@ -85,7 +86,6 @@ class ProfilePageView(TemplateView):
             return redirect('sign in')
 
 
-from django.http import HttpResponse
 def subscribe(request):
     feed_url = request.GET.get('feed')
     id = uuid.uuid3(uuid.NAMESPACE_DNS, feed_url)
@@ -113,6 +113,25 @@ def subscribe(request):
     try:
         profile = Profile.objects.get(user=request.user)
         profile.subscribes.add(p)
+        profile.save()
+    except Profile.DoesNotExist:
+        pass
+
+    return HttpResponse()
+
+
+def unsubscribe(request):
+    feed_url = request.GET.get('feed')
+    id = uuid.uuid3(uuid.NAMESPACE_DNS, feed_url)
+
+    try:
+        p = Podcast.objects.get(id=id)
+    except Podcast.DoesNotExist:
+        pass
+
+    try:
+        profile = Profile.objects.get(user=request.user)
+        profile.subscribes.remove(p)
         profile.save()
     except Profile.DoesNotExist:
         pass

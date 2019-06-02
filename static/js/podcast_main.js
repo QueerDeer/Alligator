@@ -241,3 +241,21 @@ function search()
 	var url = "//" + window.location.host + "/api/search?term=" + searchInput + "#begin";
 	window.open(url, "_self");
 }
+
+function button_sub(value, feedUrl) {
+  var subbutton = document.querySelector('#subbutton' + value);
+
+  subbutton.classList.add('disabled');
+  subbutton.text = "Subscribed";
+
+  window.fetch("/account/subscribe?feed=" + feedUrl)
+}
+
+function button_unsub(value, feedUrl) {
+  var unsubbutton = document.querySelector('#unsubbutton' + value);
+
+  unsubbutton.classList.add('disabled');
+  unsubbutton.text = "Unsubscribed";
+
+  window.fetch("/account/unsubscribe?feed=" + feedUrl)
+}

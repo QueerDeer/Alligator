@@ -71,7 +71,6 @@
                     </div>
                     <p><a href="{% url 'current episode' %}?feed={{ feed_url }}&episode=0" class="btn btn-primary btn-sm py-3 px-4 small">Read The
                         Transcript</a></p>
-{#                    <p><a href="#" class="btn btn-primary btn-sm py-3 px-4 small">Subscribe</a></p>#}
 
                     <div class="player">
                         <audio id="player2" preload="none" controls style="max-width: 100%">
@@ -84,12 +83,29 @@
         </div>
     </div>
 
+    {% load with_feedurl %}
+    {% if user.is_authenticated %}
+        {% if not user.profile.subscribes|with_feedurl:feed_url %}
+            <div class="container">
+                <div class="float-right" style="padding-top: 24px; margin-right: 6px;">
+                    <a id="subbutton0" class="btn text-white btn-primary btn-sm py-2 px-3 small"
+                       onclick="button_sub(0, '{{ feed_url }}')">Subscribe +</a>
+                </div>
+            </div>
+        {% else %}
+            <div class="container">
+                <div class="float-right" style="padding-top: 24px; margin-right: 6px;">
+                    <a id="unsubbutton0" class="btn btn-secondary btn-sm py-2 px-3 small"
+                       onclick="button_unsub(0, '{{ feed_url }}')">unsubscribe</a>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
 
     <div class="site-section bg-light">
         <div class="container">
-
             <div class="row mb-5" data-aos="fade-up">
-                <div class="col-md-12 text-center">
+                <div class="col-12 text-center">
                     <h2 class="font-weight-bold text-black">Recent Podcasts</h2>
                 </div>
             </div>
