@@ -60,7 +60,14 @@
 
                 <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
                     <h2 class="text-white font-weight-light mb-2 display-4">{{ podcast.items.0.title }}</h2>
-                    <div class="text-white mb-4"><span class="text-white-opacity-05"><small>{{ podcast.itunes_author_name }} | {{ podcast.items.0.published_date }} | {{ podcast.items.0.itunes_duration }} </small></span>
+                    <div class="text-white mb-4">
+                        <span class="text-white-opacity-05">
+                            <small>
+                                <a href="{% url 'itunes search' %}?term={{ podcast.itunes_author_name|lower }}#begin" style="color: rgba(0, 0, 0, 0.5)">
+                                    {{ podcast.itunes_author_name }} | {{ podcast.items.0.published_date }} | {{ podcast.items.0.itunes_duration }}
+                                </a>
+                            </small>
+                        </span>
                     </div>
                     <p><a href="{% url 'current episode' %}?feed={{ feed_url }}&episode=0" class="btn btn-primary btn-sm py-3 px-4 small">Read The
                         Transcript</a></p>
